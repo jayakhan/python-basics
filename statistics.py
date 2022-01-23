@@ -1,7 +1,7 @@
 import math
+from typing import List, Union
 
-
-def average(integers):
+def average(integers: List[List[int]]) -> float:
     """
     Return the average of of a list of list of integers 
     Input: a list of lists of integers
@@ -17,13 +17,13 @@ def average(integers):
     return average
 
 
-def standard_deviation(integers):
+def standard_deviation(integers: List[List[int]]) -> float:
     """
     Return the standard deviation of a list of list of integers 
     Input: a list of lists of integers
     Output: the standard deviation of all integers (rounded to 1 decimal)
     """
-    sum_squares = 0
+    sum_squares = 0.0
     count = 0
     mean = average(integers)
     for list in integers:
@@ -34,7 +34,7 @@ def standard_deviation(integers):
     return std
 
 
-def covariance(integers):
+def covariance(integers: List[List[int]]) -> float:
     """
     Return the covariance of two list of integers 
     Input: two lists of integers
@@ -49,7 +49,7 @@ def covariance(integers):
     return round(sum(prod_deviation) / n, 0)
 
 
-def correlation(integers):
+def correlation(integers: List[List[int]]) -> float:
     """
     Return the Pearson Correlation score for the two lists
     Input: two lists of integers
@@ -69,11 +69,7 @@ def correlation(integers):
     return round(sum(prod_deviation) / (std_x * std_y), 3)
 
 
-def get_data(path):
-    """
-    Returns a list of lists of integers
-    Input: a file path (string)
-    """
+def get_data(path: str) -> List[List[int]]:
     list_list = []
     with open(path, "r") as f:
         lines = f.readlines()
@@ -85,7 +81,7 @@ def get_data(path):
     return list_list
 
 
-def analyze_data(integers, statistics):
+def analyze_data(integers: List[List[int]], statistics: str)-> Union[float, str]:
     """
     Returns a floating point number
     Input: a list of lists of integers
@@ -95,6 +91,7 @@ def analyze_data(integers, statistics):
         * "covariance" (between the two lists)
         * "correlation"
     """
+    
     if statistics == "average":
         return average(integers)
     elif statistics == "standard deviation":
@@ -107,14 +104,15 @@ def analyze_data(integers, statistics):
         return "Not available"
 
 
+# Code to test:
 def main():
-    integers = get_data("integers.txt")
-    print(integers)
-    print(analyze_data(integers, "average"))
-    print(analyze_data(integers, "standard deviation"))
-    print(analyze_data(integers, "covariance"))
-    print(analyze_data(integers, "correlation"))
+     integers = get_data("integers.txt")
+     print(integers)
+     print(analyze_data(integers, "average"))
+     print(analyze_data(integers, "standard deviation"))
+     print(analyze_data(integers, "covariance"))
+     print(analyze_data(integers, "correlation"))
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()
